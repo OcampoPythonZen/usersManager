@@ -9,4 +9,5 @@ public class CourseEntity {
     LocalDateTime initialDate = null;
     LocalDateTime finishedDate = null;
     String requirements = "";
+    String instructor = "";
 }
