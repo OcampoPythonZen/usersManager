@@ -3,15 +3,14 @@ package edo.mex.gob.gui.home;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class RightPanel extends JPanel {
 
@@ -64,6 +63,10 @@ public class RightPanel extends JPanel {
         constraints.gridwidth = 3;
         constraints.anchor = GridBagConstraints.CENTER;
         add(cancel, constraints);
-    }
 
+        cancel.addActionListener(e -> {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        });
+    }
 }
