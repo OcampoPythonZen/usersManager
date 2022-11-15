@@ -31,7 +31,7 @@ public class RightPanel extends JPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.WEST;
-        constraints.insets = new Insets(20, 20, 20, 20);
+        constraints.insets = new Insets(20,20,20,20);
 
         setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Acceso al Usuario"));
@@ -67,6 +67,10 @@ public class RightPanel extends JPanel {
         cancel.addActionListener(e -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
+        });
+
+        access.addActionListener(e ->{
+
         });
     }
 }
