@@ -18,6 +18,7 @@ public class HomeGUI extends JFrame {
 
         String title = "Sistema de Alta de Usuarios a los Cursos - Tlalnepantla Estado de Mexico";
         setTitle(title);
+
         Toolkit myScreen = Toolkit.getDefaultToolkit();
         Dimension screenSize = myScreen.getScreenSize();
         setBounds(
@@ -26,6 +27,7 @@ public class HomeGUI extends JFrame {
                 screenSize.width / 2,
                 screenSize.height / 2
         );
+
         setResizable(false);
 
         contentPane.add(lp);
