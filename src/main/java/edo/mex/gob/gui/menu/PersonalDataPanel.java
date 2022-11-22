@@ -2,6 +2,7 @@ package edo.mex.gob.gui.menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.Properties;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -26,6 +27,7 @@ public class PersonalDataPanel extends JPanel {
     JLabel birthDateLabel;
     JLabel sexLabel;
     JRadioButton man;
+    JLabel womanLabel;
     JRadioButton woman;
     ButtonGroup genderGroup;
     JLabel emailLabel;
@@ -71,10 +73,7 @@ public class PersonalDataPanel extends JPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
-
-        setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(), "Datos del Usuario"));
-
+        constraints.insets = new Insets(20, 20, 20, 20);
         setLayout(new GridBagLayout());
 
         constraints.gridx = 0;

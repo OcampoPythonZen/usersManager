@@ -57,17 +57,13 @@ public class AddressDataPanel extends JPanel {
         countryLabel = new JLabel("Ciudad:");
         countryText = new JTextField(16);
 
-        clearBtn = new JButton("Limpiar Datos");
+        clearBtn = new JButton("Limpiar");
         cancelBtn = new JButton("Cancelar");
-        submitBtn = new JButton("Enviar");
+        submitBtn = new JButton("Guardar");
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(20, 20, 20, 20);
-
-        setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(), "Direccion del Usuario"));
-
         setLayout(new GridBagLayout());
 
         constraints.gridx = 0;
