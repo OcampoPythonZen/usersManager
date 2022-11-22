@@ -1,7 +1,6 @@
 package edo.mex.gob.gui.menu;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 
@@ -13,7 +12,7 @@ public class MenuGUI extends JFrame {
     public MenuGUI() {
 
         Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(2,1));
+        contentPane.setLayout(new GridLayout(2, 1));
 
         String title = "Alta de Usuarios  - Tlalnepantla Estado de Mexico";
         setTitle(title);
