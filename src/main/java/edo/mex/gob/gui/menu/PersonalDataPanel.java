@@ -2,9 +2,9 @@ package edo.mex.gob.gui.menu;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.util.Properties;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -24,10 +24,10 @@ public class PersonalDataPanel extends JPanel {
     JLabel secondLastNameLabel;
     JTextField secondLastnameText;
     JLabel birthDateLabel;
-    JLabel manLabel;
+    JLabel sexLabel;
     JRadioButton man;
-    JLabel womanLabel;
     JRadioButton woman;
+    ButtonGroup genderGroup;
     JLabel emailLabel;
     JTextField emailText;
     JLabel phoneLabel;
@@ -36,19 +36,18 @@ public class PersonalDataPanel extends JPanel {
     public PersonalDataPanel() {
 
         firstNameLabel = new JLabel("Primer Nombre:");
-        firstNameText = new JTextField(8);
+        firstNameText = new JTextField(16);
 
         firstSecondNameLabel = new JLabel("Segundo Nombre:");
-        firstSecondNameText = new JTextField(8);
+        firstSecondNameText = new JTextField(16);
 
         lastNameLabel = new JLabel("Apellido Paterno:");
-        lastNameText = new JTextField(8);
+        lastNameText = new JTextField(16);
 
         secondLastNameLabel = new JLabel("Apellido Materno:");
-        secondLastnameText = new JTextField(8);
+        secondLastnameText = new JTextField(16);
 
         birthDateLabel = new JLabel("Fecha de Nacimiento:");
-
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
         p.put("text.today", "Today");
@@ -57,52 +56,93 @@ public class PersonalDataPanel extends JPanel {
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
-        manLabel = new JLabel("H");
-        man = new JRadioButton();
-
-        womanLabel = new JLabel("M");
-        woman = new JRadioButton();
+        sexLabel = new JLabel("Sexo:");
+        genderGroup = new ButtonGroup();
+        man = new JRadioButton("Hombre", false);
+        woman = new JRadioButton("Mujer", false);
+        genderGroup.add(man);
+        genderGroup.add(woman);
 
         emailLabel = new JLabel("Correo Electronico:");
-        emailText = new JTextField(8);
+        emailText = new JTextField(32);
 
         phoneLabel = new JLabel("Telefono / Celular:");
-        phoneText = new JTextField(8);
+        phoneText = new JTextField(32);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(20, 20, 20, 20);
 
         setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Datos del Usuario"));
 
         setLayout(new GridBagLayout());
 
+        constraints.gridx = 0;
+        constraints.gridy = 0;
         add(firstNameLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 0;
         add(firstNameText, constraints);
 
+        constraints.gridx = 2;
+        constraints.gridy = 0;
         add(firstSecondNameLabel, constraints);
+
+        constraints.gridx = 3;
+        constraints.gridy = 0;
         add(firstSecondNameText, constraints);
 
+        constraints.gridx = 0;
+        constraints.gridy = 2;
         add(lastNameLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 2;
         add(lastNameText, constraints);
 
+        constraints.gridx = 2;
+        constraints.gridy = 2;
         add(secondLastNameLabel, constraints);
+
+        constraints.gridx = 3;
+        constraints.gridy = 2;
         add(secondLastnameText, constraints);
 
+        constraints.gridx = 1;
+        constraints.gridy = 4;
         add(birthDateLabel, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 4;
         add(datePicker, constraints);
 
-        add(manLabel, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 5;
+        add(sexLabel, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 5;
         add(man, constraints);
 
-        add(womanLabel, constraints);
+        constraints.gridx = 2;
+        constraints.gridy = 6;
         add(woman, constraints);
 
+        constraints.gridx = 0;
+        constraints.gridy = 7;
         add(emailLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 7;
         add(emailText, constraints);
 
+        constraints.gridx = 0;
+        constraints.gridy = 8;
         add(phoneLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 8;
         add(phoneText, constraints);
 
     }
