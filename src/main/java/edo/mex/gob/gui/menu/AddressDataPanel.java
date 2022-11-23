@@ -62,7 +62,7 @@ public class AddressDataPanel extends JPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(20, 20, 20, 20);
+        //constraints.insets = new Insets(20, 20, 20, 20);
         setLayout(new GridBagLayout());
 
         constraints.gridx = 0;
