@@ -8,9 +8,9 @@ import java.sql.SQLException;
 public class MainGUI {
 
     public static void main(String[] args) throws SQLException {
-        //HomeGUI main = new HomeGUI();
+        HomeGUI main = new HomeGUI();
         //MenuGUI menu = new MenuGUI();
-        BatchSqlTables sql = new BatchSqlTables();
+        //BatchSqlTables sql = new BatchSqlTables();
 
     }
 }

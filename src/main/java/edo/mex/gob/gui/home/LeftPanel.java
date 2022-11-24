@@ -38,7 +38,7 @@ public class LeftPanel extends JPanel {
         welcomeLabel2.setHorizontalAlignment(JLabel.CENTER);
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.anchor = GridBagConstraints.WEST;
+        constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(10, 10, 10, 10);
 
         Image img;

@@ -2,6 +2,7 @@ package edo.mex.gob.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -13,6 +14,11 @@ public class Connector {
     String url = "jdbc:postgresql://localhost:5432/users_manager_db?socketTimeout=30";
     String username = "rappipay";
     String password = "secret";
+
+    public Connector() throws SQLException{
+        Connection connection = DriverManager.getConnection(url, username, password);
+        logger.info("USER_MANAGERS --Just Connector --Successfully Database Connection");
+    }
 
     public Connector(List<String> queries) throws SQLException {
         Connection connection = DriverManager.getConnection(url, username, password);
@@ -29,11 +35,12 @@ public class Connector {
         connection.close();
     }
 
-    public Connector(String query) throws SQLException {
+    public ResultSet resultSetConn(String query) throws SQLException {
         Connection connection = DriverManager.getConnection(url, username, password);
         logger.info("USER_MANAGERS --Connector with this one query --Successfully Database Connection");
         Statement stm = connection.createStatement();
-        stm.execute(query);
+        ResultSet rs = stm.executeQuery(query);
         connection.close();
+        return rs;
     }
 }

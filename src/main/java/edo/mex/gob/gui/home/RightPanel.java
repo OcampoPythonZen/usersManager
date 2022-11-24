@@ -1,12 +1,16 @@
 package edo.mex.gob.gui.home;
 
+import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -30,7 +34,7 @@ public class RightPanel extends JPanel {
         cancel = new JButton("Cancelar");
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.anchor = GridBagConstraints.WEST;
+        constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(20, 20, 20, 20);
 
         setBorder(BorderFactory.createTitledBorder(
@@ -70,6 +74,53 @@ public class RightPanel extends JPanel {
         });
 
         access.addActionListener(e -> {
+
+            String user = userTextField.getText();
+            String pass = String.valueOf(passwordTextField.getPassword());
+
+            if (user.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        this.getTopLevelAncestor(),
+                        "Usuario y Contraseña son mandatorios!",
+                        "NO AUTENTICADO",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            } else {
+                String query = String.format(
+                        "SELECT user_login, password_login FROM login WHERE user_login = '%s' AND password_login = '%s' ORDER BY created_at DESC LIMIT 1;",
+                        user,
+                        pass
+                );
+                try {
+                    Connector conn = new Connector();
+                    ResultSet rs = conn.resultSetConn(query);
+                    String userRs = "";
+                    String passRs = "";
+
+                    while (rs.next()) {
+                        userRs = rs.getString("user_login");
+                        passRs = rs.getString("password_login");
+                    }
+
+                    if (userRs.equals(user) && passRs.equals(pass)) {
+                        JOptionPane.showMessageDialog(
+                                this.getTopLevelAncestor(),
+                                "Credenciales Validas para este Usuario!",
+                                "BIENVENIDA",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                this.getTopLevelAncestor(),
+                                "Credenciales invalidas!",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
 
         });
     }
