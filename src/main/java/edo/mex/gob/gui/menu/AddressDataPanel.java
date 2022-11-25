@@ -3,7 +3,6 @@ package edo.mex.gob.gui.menu;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,9 +25,6 @@ public class AddressDataPanel extends JPanel {
     JTextField stateText;
     JLabel countryLabel;
     JTextField countryText;
-    JButton clearBtn;
-    JButton cancelBtn;
-    JButton submitBtn;
 
     public AddressDataPanel() {
 
@@ -56,13 +52,9 @@ public class AddressDataPanel extends JPanel {
         countryLabel = new JLabel("Ciudad:");
         countryText = new JTextField(16);
 
-        clearBtn = new JButton("Limpiar");
-        cancelBtn = new JButton("Cancelar");
-        submitBtn = new JButton("Guardar");
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(10,10, 10, 10);
+        constraints.insets = new Insets(10, 10, 10, 10);
         setLayout(new GridBagLayout());
 
         constraints.gridx = 0;
@@ -128,18 +120,6 @@ public class AddressDataPanel extends JPanel {
         constraints.gridx = 1;
         constraints.gridy = 10;
         add(countryText, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 13;
-        add(clearBtn, constraints);
-
-        constraints.gridx = 3;
-        constraints.gridy = 13;
-        add(cancelBtn, constraints);
-
-        constraints.gridx = 5;
-        constraints.gridy = 13;
-        add(submitBtn, constraints);
 
     }
 }
