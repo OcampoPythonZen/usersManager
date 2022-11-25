@@ -40,7 +40,7 @@ public class ImageLeftPanel extends JPanel {
 
         Image img;
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/user.png")));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/user_icon.png")));
         } catch (IOException e) {
             throw new RuntimeException(e + "We cannot access to this image!");
         }
@@ -48,8 +48,6 @@ public class ImageLeftPanel extends JPanel {
         imageButton.setBackground(null);
         imageButton.setBorder(null);
         imageButton.setContentAreaFilled(false);
-        imageButton.setHorizontalAlignment(JButton.CENTER);
-        imageButton.setVerticalAlignment(JButton.CENTER);
 
         setLayout(new GridBagLayout());
 
