@@ -15,9 +15,10 @@ public class Connector {
     String username = "rappipay";
     String password = "secret";
 
-    public Connector() throws SQLException{
+    public Connector() throws SQLException {
         Connection connection = DriverManager.getConnection(url, username, password);
         logger.info("USER_MANAGERS --Just Connector --Successfully Database Connection");
+        connection.close();
     }
 
     public Connector(List<String> queries) throws SQLException {
@@ -42,5 +43,14 @@ public class Connector {
         ResultSet rs = stm.executeQuery(query);
         connection.close();
         return rs;
+    }
+
+    public Connector insertIntoTable(String query) throws SQLException {
+        Connection connection = DriverManager.getConnection(url, username, password);
+        Statement stm = connection.createStatement();
+        ResultSet rs = stm.executeQuery(query);
+        logger.info("USER_MANAGERS --insertIntoTable --Inserted into db");
+        connection.close();
+        return null;
     }
 }

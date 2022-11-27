@@ -2,7 +2,6 @@ package edo.mex.gob.gui.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 public class MenuGUI extends JFrame {
@@ -22,7 +21,6 @@ public class MenuGUI extends JFrame {
 
         contentPane.add(ilp, BorderLayout.WEST);
         contentPane.add(cup, BorderLayout.EAST);
-
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 

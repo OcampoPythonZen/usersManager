@@ -1,15 +1,14 @@
 package edo.mex.gob.gui.menu;
 
+import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -200,8 +199,211 @@ public class CreateUserPanel extends JPanel {
         constraints.gridy = 8;
         add(phoneText, constraints);
 
+        //Address Data Elements
+        constraints.gridx = 0;
+        constraints.gridy = 10;
+        add(streetNameLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 10;
+        add(streetNameText, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 10;
+        add(interiorNumberLabel, constraints);
+
+        constraints.gridx = 3;
+        constraints.gridy = 10;
+        add(interiorNumberText, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 10;
+        add(exteriorNumberLabel, constraints);
+
+        constraints.gridx = 5;
+        constraints.gridy = 10;
+        add(exteriorNumberText, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 12;
+        add(suburbLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 12;
+        add(suburbText, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 12;
+        add(zipCodeLabel, constraints);
+
+        constraints.gridx = 5;
+        constraints.gridy = 12;
+        add(zipCodeText, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 14;
+        add(municipalityLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 14;
+        add(municipalityText, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 14;
+        add(stateLabel, constraints);
+
+        constraints.gridx = 3;
+        constraints.gridy = 14;
+        add(stateText, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 14;
+        add(countryLabel, constraints);
+
+        constraints.gridx = 5;
+        constraints.gridy = 14;
+        add(countryText, constraints);
+
+        //Buttons
+        constraints.gridx = 0;
+        constraints.gridy = 17;
+        add(clearBtn, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 17;
+        add(cancelBtn, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 17;
+        add(submitBtn, constraints);
+
+        cancelBtn.addActionListener(e -> {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        });
+
+        clearBtn.addActionListener(e -> {
+            List<JTextField> allJTextField = List.of(
+                    firstNameText,
+                    firstSecondNameText,
+                    lastNameText,
+                    secondLastnameText,
+                    datePicker.getJFormattedTextField(),
+                    emailText,
+                    phoneText,
+
+                    streetNameText,
+                    interiorNumberText,
+                    exteriorNumberText,
+                    suburbText,
+                    zipCodeText,
+                    municipalityText,
+                    stateText,
+                    countryText
+            );
+            genderGroup.clearSelection();
+            clearAllFields(allJTextField);
+            firstNameText.requestFocus();
+        });
+
+        submitBtn.addActionListener(e -> {
+            String firstName = firstNameText.getText();
+            String firstSecondName = firstSecondNameText.getText();
+            String lastName = lastNameText.getText();
+            String secondLastName = secondLastnameText.getText();
+            String birthdate = datePicker.getJFormattedTextField().getText();
+            String gender = validateGender(genderGroup);
+            String email = emailText.getText();
+            String phone = phoneText.getText();
+
+            String street = streetNameText.getText();
+            String interiorNumber = interiorNumberText.getText();
+            String exteriorNumber = exteriorNumberText.getText();
+            String suburb = suburbText.getText();
+            String zipCode = zipCodeText.getText();
+            String municipality = municipalityText.getText();
+            String state = stateText.getText();
+            String country = countryText.getText();
+
+            String query = String.format(
+                    "INSERT INTO \"user\"(" +
+                            "first_name, second_first_name, last_name, second_last_name, birth_date, gender, email, phone," +
+                            "street_name, interior_number, exterior_number, suburb, zip_code, municipality, state_address, country)" +
+                            "VALUES ('%s', '%s','%s','%s', '%s', '%s', '%s', '%s'," +
+                            "'%s', '%s', '%s', '%s','%s', '%s', '%s', '%s');",
+                    firstName,
+                    firstSecondName,
+                    lastName,
+                    secondLastName,
+                    birthdate,
+                    gender,
+                    email,
+                    phone,
+
+                    street,
+                    interiorNumber,
+                    exteriorNumber,
+                    suburb,
+                    zipCode,
+                    municipality,
+                    state,
+                    country
+            );
+
+            try {
+                Connector conn = new Connector().insertIntoTable(query);
+                JOptionPane.showMessageDialog(
+                        this.getTopLevelAncestor(),
+                        "Usuario almacenado en base de datos!",
+                        "ALMACENAMIENTO DE DATOS",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+                List<JTextField> allJTextField = List.of(
+                        firstNameText,
+                        firstSecondNameText,
+                        lastNameText,
+                        secondLastnameText,
+                        datePicker.getJFormattedTextField(),
+                        emailText,
+                        phoneText,
+
+                        streetNameText,
+                        interiorNumberText,
+                        exteriorNumberText,
+                        suburbText,
+                        zipCodeText,
+                        municipalityText,
+                        stateText,
+                        countryText
+                );
+                genderGroup.clearSelection();
+                clearAllFields(allJTextField);
+                firstNameText.requestFocus();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        });
     }
 
+    private String validateGender(ButtonGroup bg) {
+        String gender = "NO_GENDER";
+        for (Enumeration<AbstractButton> btns = bg.getElements(); btns.hasMoreElements(); ) {
+            AbstractButton btn = btns.nextElement();
+            if (btn.isSelected()) {
+                gender = btn.getText();
+            }
+        }
+        return gender;
+    }
+
+    private void clearAllFields(List<JTextField> allJTextField) {
+        String empty = "";
+        allJTextField.forEach(
+                (element) -> {
+                    element.setText(empty);
+                });
+    }
 
 }
 

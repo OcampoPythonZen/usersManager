@@ -93,8 +93,7 @@ public class RightPanel extends JPanel {
                         pass
                 );
                 try {
-                    Connector conn = new Connector();
-                    ResultSet rs = conn.resultSetConn(query);
+                    ResultSet rs = new Connector().resultSetConn(query);
                     String userRs = "";
                     String passRs = "";
 

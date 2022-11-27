@@ -15,11 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ImageLeftPanel extends JPanel {
+
     JButton imageButton;
     JLabel welcomeLabel;
     JLabel welcomeLabel2;
 
     public ImageLeftPanel() {
+
         imageButton = new JButton();
         welcomeLabel = new JLabel();
         welcomeLabel2 = new JLabel();
