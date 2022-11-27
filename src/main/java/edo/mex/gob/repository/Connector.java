@@ -45,12 +45,11 @@ public class Connector {
         return rs;
     }
 
-    public Connector insertIntoTable(String query) throws SQLException {
+    public void insertIntoTable(String query) throws SQLException {
         Connection connection = DriverManager.getConnection(url, username, password);
         Statement stm = connection.createStatement();
-        ResultSet rs = stm.executeQuery(query);
+        int rs = stm.executeUpdate(query);
         logger.info("USER_MANAGERS --insertIntoTable --Inserted into db");
         connection.close();
-        return null;
     }
 }

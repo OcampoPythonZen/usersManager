@@ -351,7 +351,7 @@ public class CreateUserPanel extends JPanel {
             );
 
             try {
-                Connector conn = new Connector().insertIntoTable(query);
+                new Connector().insertIntoTable(query);
                 JOptionPane.showMessageDialog(
                         this.getTopLevelAncestor(),
                         "Usuario almacenado en base de datos!",
