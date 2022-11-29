@@ -1,4 +1,4 @@
-package edo.mex.gob.gui.menu;
+package edo.mex.gob.gui.course;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,17 +14,19 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ImageLeftPanel extends JPanel {
+public class CourseLeftPanel  extends JPanel {
+
     JButton imageButton;
     JLabel welcomeLabel;
     JLabel welcomeLabel2;
 
-    public ImageLeftPanel() {
+    public CourseLeftPanel() {
+
         imageButton = new JButton();
         welcomeLabel = new JLabel();
         welcomeLabel2 = new JLabel();
 
-        welcomeLabel.setText("ALTA DE USUARIO AL CURSO");
+        welcomeLabel.setText("ALTA DE CURSO");
         welcomeLabel.setFont(new Font("Calibri", Font.BOLD, 22));
         welcomeLabel.setForeground(Color.BLUE);
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -40,7 +42,7 @@ public class ImageLeftPanel extends JPanel {
 
         Image img;
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/user_icon.png")));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/course.png")));
         } catch (IOException e) {
             throw new RuntimeException(e + "We cannot access to this image!");
         }
@@ -63,5 +65,4 @@ public class ImageLeftPanel extends JPanel {
         constraints.gridy = 2;
         add(welcomeLabel2, constraints);
     }
-
 }

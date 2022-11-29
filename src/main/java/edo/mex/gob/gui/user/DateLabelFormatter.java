@@ -1,4 +1,4 @@
-package edo.mex.gob.gui.menu;
+package edo.mex.gob.gui.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +21,6 @@ public class DateLabelFormatter extends JFormattedTextField.AbstractFormatter {
             Calendar cal = (Calendar) value;
             return dateFormatter.format(cal.getTime());
         }
-
         return "";
     }
 
