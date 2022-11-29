@@ -1,4 +1,4 @@
-package edo.mex.gob.gui.menu;
+package edo.mex.gob.gui.user;
 
 import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
@@ -127,7 +127,7 @@ public class CreateUserPanel extends JPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(10, 10, 10, 10);
+        constraints.insets = new Insets(5, 5, 5, 5);
         setLayout(new GridBagLayout());
 
         //Personal Data Elements
@@ -307,6 +307,7 @@ public class CreateUserPanel extends JPanel {
         });
 
         submitBtn.addActionListener(e -> {
+
             String firstName = firstNameText.getText();
             String firstSecondName = firstSecondNameText.getText();
             String lastName = lastNameText.getText();
@@ -355,7 +356,7 @@ public class CreateUserPanel extends JPanel {
                 JOptionPane.showMessageDialog(
                         this.getTopLevelAncestor(),
                         "Usuario almacenado en base de datos!",
-                        "ALMACENAMIENTO DE DATOS",
+                        "ALTA DE USUARIO",
                         JOptionPane.INFORMATION_MESSAGE
                 );
                 List<JTextField> allJTextField = List.of(

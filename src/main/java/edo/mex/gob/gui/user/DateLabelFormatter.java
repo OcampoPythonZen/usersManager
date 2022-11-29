@@ -1,4 +1,4 @@
-package edo.mex.gob.gui.menu;
+package edo.mex.gob.gui.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
