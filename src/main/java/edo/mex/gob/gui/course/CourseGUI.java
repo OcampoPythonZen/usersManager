@@ -2,9 +2,6 @@ package edo.mex.gob.gui.course;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 public class CourseGUI extends JFrame {
@@ -13,6 +10,7 @@ public class CourseGUI extends JFrame {
     CreateCoursePanel ccp = new CreateCoursePanel();
 
     public CourseGUI() {
+
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout(1, 2));
 
@@ -28,5 +26,6 @@ public class CourseGUI extends JFrame {
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }
