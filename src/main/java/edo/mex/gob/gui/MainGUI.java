@@ -2,6 +2,7 @@ package edo.mex.gob.gui;
 
 
 import edo.mex.gob.gui.course.CourseGUI;
+import edo.mex.gob.repository.BatchSqlTables;
 import java.sql.SQLException;
 
 public class MainGUI {
@@ -10,7 +11,7 @@ public class MainGUI {
         CourseGUI c = new CourseGUI();
         //HomeGUI main = new HomeGUI();
         //MenuGUI menu = new MenuGUI();
-        //BatchSqlTables sql = new BatchSqlTables();
+       //BatchSqlTables sql = new BatchSqlTables();
 
     }
 }
