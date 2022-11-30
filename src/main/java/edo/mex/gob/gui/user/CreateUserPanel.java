@@ -1,5 +1,6 @@
 package edo.mex.gob.gui.user;
 
+import static edo.mex.gob.gui.Util.clearAllFields;
 import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -396,14 +397,6 @@ public class CreateUserPanel extends JPanel {
             }
         }
         return gender;
-    }
-
-    private void clearAllFields(List<JTextField> allJTextField) {
-        String empty = "";
-        allJTextField.forEach(
-                (element) -> {
-                    element.setText(empty);
-                });
     }
 
 }
