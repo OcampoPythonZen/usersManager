@@ -128,7 +128,7 @@ public class CreateUserPanel extends JPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(5, 5, 5, 5);
+        //constraints.insets = new Insets(5, 5, 5, 5);
         setLayout(new GridBagLayout());
 
         //Personal Data Elements
