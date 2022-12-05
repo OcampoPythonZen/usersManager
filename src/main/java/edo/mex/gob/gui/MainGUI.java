@@ -11,9 +11,9 @@ public class MainGUI {
 
     public static void main(String[] args) throws SQLException {
         CourseGUI c = new CourseGUI();
-        HomeGUI main = new HomeGUI();
-        UserGUI menu = new UserGUI();
-       //BatchSqlTables sql = new BatchSqlTables();
+        //HomeGUI main = new HomeGUI();
+        //UserGUI menu = new UserGUI();
+        //BatchSqlTables sql = new BatchSqlTables();
 
     }
 }
