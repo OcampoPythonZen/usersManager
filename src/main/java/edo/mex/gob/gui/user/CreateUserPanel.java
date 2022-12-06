@@ -4,7 +4,6 @@ import static edo.mex.gob.gui.Util.clearAllFields;
 import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.List;
