@@ -1,4 +1,6 @@
 package edo.mex.gob.gui.finder;
 
-public class CourseFinder {
+import javax.swing.JFrame;
+
+public class CourseFinder extends JFrame {
 }
