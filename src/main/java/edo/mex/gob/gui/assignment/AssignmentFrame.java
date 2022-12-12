@@ -2,7 +2,9 @@ package edo.mex.gob.gui.assignment;
 
 import edo.mex.gob.repository.Connector;
 import java.awt.Container;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
@@ -23,19 +25,24 @@ public class AssignmentFrame extends JFrame {
     JComboBox<String> coursesBox;
 
     JTable usersTable;
+    JTable userAddedTable;
     JTable coursesTable;
 
-    JButton add;
-    JButton delete;
-    JButton save;
-    JButton close;
+    JButton addUser;
+    JButton addCourse;
+
+    JButton deleteUser;
+    JButton deleteCourse;
+
+    JButton saveBtn;
+    JButton sentEmailBtn;
+    JButton closeBtn;
 
     String getCoursesQuery = "select course_name from course;";
     String getFilterUsersQuery =
             "select id_user, first_name, second_first_name, last_name, second_last_name, email from public.user;";
     String[] columnsNames =
             {"Id", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Correo Electronico"};
-    String[][] data = {{}};
 
     public AssignmentFrame() {
 
@@ -43,7 +50,10 @@ public class AssignmentFrame extends JFrame {
         setTitle(title);
 
         Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        contentPane.setLayout(new GridBagLayout());
 
         labelUser = new JLabel("Busqueda de usuario:");
         searchUserField = new JTextField(16);
@@ -51,8 +61,10 @@ public class AssignmentFrame extends JFrame {
         coursesBox = new JComboBox<String>();
 
         usersTable = new JTable();
+
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnsNames);
+
         usersTable.setModel(model);
         usersTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         usersTable.setFillsViewportHeight(false);
@@ -63,11 +75,27 @@ public class AssignmentFrame extends JFrame {
         getUsers(getFilterUsersQuery, model);
         getCourses(getCoursesQuery);
 
-        add(labelUser);
-        add(searchUserField);
-        add(coursesLabel);
-        add(coursesBox);
-        add(scroll);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        add(labelUser, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        add(searchUserField, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        add(coursesLabel, constraints);
+
+        constraints.gridx = 3;
+        constraints.gridy = 0;
+        add(coursesBox, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 4;
+        add(scroll, constraints);
+
 
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -89,9 +117,9 @@ public class AssignmentFrame extends JFrame {
         }
     }
 
-    public void getUsers(String query, DefaultTableModel model){
+    public void getUsers(String query, DefaultTableModel model) {
         try {
-            ResultSet rs = new Connector().resultSetConn(getFilterUsersQuery);
+            ResultSet rs = new Connector().resultSetConn(query);
             while (rs.next()) {
                 String id = rs.getString("id_user");
                 String firstName = rs.getString("first_name");
