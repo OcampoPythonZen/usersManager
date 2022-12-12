@@ -2,7 +2,7 @@ package edo.mex.gob.gui.assignment;
 
 import edo.mex.gob.repository.Connector;
 import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
@@ -43,7 +43,7 @@ public class AssignmentFrame extends JFrame {
         setTitle(title);
 
         Container contentPane = getContentPane();
-        contentPane.setLayout(new FlowLayout());
+        contentPane.setLayout(new GridLayout());
 
         labelUser = new JLabel("Busqueda de usuario:");
         searchUserField = new JTextField(16);
@@ -57,35 +57,11 @@ public class AssignmentFrame extends JFrame {
         usersTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         usersTable.setFillsViewportHeight(false);
         JScrollPane scroll = new JScrollPane(usersTable);
-        scroll.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        try {
-            ResultSet rs = new Connector().resultSetConn(getFilterUsersQuery);
-            while (rs.next()) {
-                String id = rs.getString("id_user");
-                String firstName = rs.getString("first_name");
-                String secondFirstName = rs.getString("second_first_name");
-                String lastName = rs.getString("last_name");
-                String secondLastName = rs.getString("second_last_name");
-                String email = rs.getString("email");
-                model.addRow(new Object[]{id, firstName, secondFirstName, lastName, secondLastName, email});
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            ResultSet rs = new Connector().resultSetConn(getCoursesQuery);
-            while (rs.next()) {
-                String courseName = rs.getString("course_name");
-                coursesBox.addItem(courseName);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        getUsers(getFilterUsersQuery, model);
+        getCourses(getCoursesQuery);
 
         add(labelUser);
         add(searchUserField);
@@ -100,4 +76,34 @@ public class AssignmentFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+
+    public void getCourses(String query) {
+        try {
+            ResultSet rs = new Connector().resultSetConn(query);
+            while (rs.next()) {
+                String courseName = rs.getString("course_name");
+                coursesBox.addItem(courseName);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void getUsers(String query, DefaultTableModel model){
+        try {
+            ResultSet rs = new Connector().resultSetConn(getFilterUsersQuery);
+            while (rs.next()) {
+                String id = rs.getString("id_user");
+                String firstName = rs.getString("first_name");
+                String secondFirstName = rs.getString("second_first_name");
+                String lastName = rs.getString("last_name");
+                String secondLastName = rs.getString("second_last_name");
+                String email = rs.getString("email");
+                model.addRow(new Object[]{id, firstName, secondFirstName, lastName, secondLastName, email});
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
