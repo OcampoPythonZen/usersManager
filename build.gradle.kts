@@ -14,6 +14,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     implementation("org.postgresql:postgresql:42.5.0")
     implementation("org.jdatepicker:jdatepicker:1.3.4")
+    implementation("com.sun.mail:javax.mail:1.6.2")
 }
 
 tasks.getByName<Test>("test") {

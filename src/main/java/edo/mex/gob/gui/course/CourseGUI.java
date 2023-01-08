@@ -1,13 +1,16 @@
 package edo.mex.gob.gui.course;
 
+import edo.mex.gob.gui.menu.MenuGUI;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class CourseGUI extends JFrame {
 
     CourseLeftPanel clp = new CourseLeftPanel();
     CreateCoursePanel ccp = new CreateCoursePanel();
+
 
     public CourseGUI() {
 
