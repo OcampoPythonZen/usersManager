@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JRootPane;
 
 public class HomeGUI extends JFrame {
 
@@ -18,6 +19,8 @@ public class HomeGUI extends JFrame {
 
         String title = "Sistema de Alta de Usuarios a los Cursos - Tlalnepantla Estado de Mexico";
         setTitle(title);
+        setUndecorated(true);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
         Toolkit myScreen = Toolkit.getDefaultToolkit();
         Dimension screenSize = myScreen.getScreenSize();
