@@ -11,10 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class AssignmentFrame extends JFrame {
 
@@ -28,6 +28,8 @@ public class AssignmentFrame extends JFrame {
     JTable userAddedTable;
     JTable coursesTable;
 
+    TableRowSorter trs;
+
     JButton addUser;
     JButton addCourse;
 
@@ -40,9 +42,12 @@ public class AssignmentFrame extends JFrame {
 
     String getCoursesQuery = "select course_name from course;";
     String getFilterUsersQuery =
-            "select id_user, first_name, second_first_name, last_name, second_last_name, email from public.user;";
-    String[] columnsNames =
-            {"Id", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Correo Electronico"};
+            "select id_user, first_name, second_first_name, last_name, second_last_name, phone, email from public.user;";
+    String[] usersColumnsNames =
+            {"Id", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Telefono", "Correo Electronico"};
+
+    String[] coursesColumnsNames =
+            {"Id", "Nombre del Curso", "Fecha de Inicio", "Fecha de Termino", "Hora de Inicio", "Hora de termino", "Lugar", "Info"};
 
     public AssignmentFrame() {
 
@@ -61,16 +66,24 @@ public class AssignmentFrame extends JFrame {
         coursesBox = new JComboBox<String>();
 
         usersTable = new JTable();
+        userAddedTable = new JTable();
+        coursesTable = new JTable();
 
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(columnsNames);
+        setTablesProperties(usersColumnsNames, model, usersTable);
 
-        usersTable.setModel(model);
-        usersTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        usersTable.setFillsViewportHeight(false);
-        JScrollPane scroll = new JScrollPane(usersTable);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        //JScrollPane scrollUserTable = new JScrollPane(usersTable);
+        //scrollUserTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        //scrollUserTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        //Buttons
+        addUser = new JButton("Agregar Usuario");
+        deleteUser = new JButton("Eliminar Usuario");
+        addCourse = new JButton("Agregar Curso");
+        deleteCourse = new JButton("Eliminar Curso");
+        saveBtn = new JButton("Guardar");
+        sentEmailBtn = new JButton("Enviar Correo");
+        closeBtn = new JButton("Salir");
 
         getUsers(getFilterUsersQuery, model);
         getCourses(getCoursesQuery);
@@ -83,25 +96,56 @@ public class AssignmentFrame extends JFrame {
         constraints.gridy = 0;
         add(searchUserField, constraints);
 
-        constraints.gridx = 2;
-        constraints.gridy = 0;
+        constraints.gridx = 0;
+        constraints.gridy = 13;
         add(coursesLabel, constraints);
 
-        constraints.gridx = 3;
-        constraints.gridy = 0;
+        constraints.gridx = 1;
+        constraints.gridy = 13;
         add(coursesBox, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
-        constraints.gridwidth = 4;
-        add(scroll, constraints);
+        add(usersTable, constraints);
 
+        constraints.gridx = 4;
+        constraints.gridy = 0;
+        add(addUser, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 1;
+        add(deleteUser, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 13;
+        add(addCourse, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 14;
+        add(deleteCourse, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 21;
+        add(saveBtn, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 21;
+        add(sentEmailBtn, constraints);
+
+        constraints.gridx = 4;
+        constraints.gridy = 21;
+        add(closeBtn, constraints);
 
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        closeBtn.addActionListener(e -> {
+            this.dispose();
+        });
+
 
     }
 
@@ -126,12 +170,20 @@ public class AssignmentFrame extends JFrame {
                 String secondFirstName = rs.getString("second_first_name");
                 String lastName = rs.getString("last_name");
                 String secondLastName = rs.getString("second_last_name");
+                String phone = rs.getString("phone");
                 String email = rs.getString("email");
-                model.addRow(new Object[]{id, firstName, secondFirstName, lastName, secondLastName, email});
+                model.addRow(new Object[]{id, firstName, secondFirstName, lastName, secondLastName, phone, email});
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setTablesProperties(String[] columns, DefaultTableModel model, JTable table) {
+        model.setColumnIdentifiers(columns);
+        table.setModel(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setFillsViewportHeight(true);
     }
 
 }
