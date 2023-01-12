@@ -1,6 +1,7 @@
 package edo.mex.gob.gui.course;
 
 import static edo.mex.gob.gui.Util.clearAllFields;
+import edo.mex.gob.gui.menu.MenuGUI;
 import edo.mex.gob.gui.user.DateLabelFormatter;
 import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
@@ -175,6 +176,7 @@ public class CreateCoursePanel extends JPanel {
         cancelBtn.addActionListener(e -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
+            new MenuGUI().setVisible(true);
         });
 
         clearBtn.addActionListener(e -> {

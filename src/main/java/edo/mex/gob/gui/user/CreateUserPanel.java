@@ -1,6 +1,7 @@
 package edo.mex.gob.gui.user;
 
 import static edo.mex.gob.gui.Util.clearAllFields;
+import edo.mex.gob.gui.menu.MenuGUI;
 import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,7 +9,16 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -280,6 +290,7 @@ public class CreateUserPanel extends JPanel {
         cancelBtn.addActionListener(e -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
+            new MenuGUI().setVisible(true);
         });
 
         clearBtn.addActionListener(e -> {

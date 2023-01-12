@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     implementation("org.postgresql:postgresql:42.5.1")
     implementation("org.jdatepicker:jdatepicker:1.3.4")
     implementation("com.sun.mail:javax.mail:1.6.2")

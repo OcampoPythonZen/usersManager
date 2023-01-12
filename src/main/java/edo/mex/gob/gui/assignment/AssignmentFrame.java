@@ -1,5 +1,6 @@
 package edo.mex.gob.gui.assignment;
 
+import edo.mex.gob.gui.menu.MenuGUI;
 import edo.mex.gob.repository.Connector;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -144,6 +145,7 @@ public class AssignmentFrame extends JFrame {
 
         closeBtn.addActionListener(e -> {
             this.dispose();
+            new MenuGUI().setVisible(true);
         });
 
 
