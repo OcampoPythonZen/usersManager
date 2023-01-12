@@ -72,6 +72,7 @@ public class RightPanel extends JPanel {
         cancel.addActionListener(e -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
+            System.exit(0);
         });
 
         access.addActionListener(e -> {
