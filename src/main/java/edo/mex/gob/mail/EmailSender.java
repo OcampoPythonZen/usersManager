@@ -1,6 +1,8 @@
 package edo.mex.gob.mail;
 
+import edo.mex.gob.repository.Connector;
 import java.util.Properties;
+import java.util.logging.Logger;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -11,21 +13,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class EmailSender {
-    public static void main(String[] args) {
-        // Your email and password
-        String myEmail = "depdireccionmujer@gmail.com";
-        String myPassword = "rjszameexkcsujod";
 
-        // Email information
-        String recipient = "edgar.ocampo.b@gmail.com";
-        String subject = "Email subject";
-        String body = "This is the email body";
+    static Logger logger = Logger.getLogger(Connector.class.getName());
 
-        sendEmail(myEmail, myPassword, recipient, subject, body);
-    }
+    private static void sendEmail(String recipient, String subject, String body) {
 
-    private static void sendEmail(String myEmail, String myPassword, String recipient, String subject, String body) {
-        // Email account configuration
+        // Your email and password credentials
+        final String myEmail = "depdireccionmujer@gmail.com";
+        final String myPassword = "rjszameexkcsujod";
+
+        // Email account properties configuration
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -49,10 +46,14 @@ public class EmailSender {
 
             // Send email
             Transport.send(message);
-
-            System.out.println("The email has been sent successfully");
+            logger.info(String.format(
+                    "The email has been sent successfully --recipient: [{}] --subject: [{}] --body: [{}]",
+                    recipient,
+                    subject,
+                    body
+            ));
         } catch (MessagingException e) {
-            System.out.println("There was an error sending the email: " + e.getMessage());
+            logger.warning(String.format("There was an error sending the email --error[{}]", e.getMessage()));
         }
     }
 }
