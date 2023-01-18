@@ -12,8 +12,8 @@ public class Connector {
 
     Logger logger = Logger.getLogger(Connector.class.getName());
     String url = "jdbc:postgresql://localhost:5432/users_manager_db?socketTimeout=30";
-    String username = "rappipay";
-    String password = "secret";
+    String username = "postgres";
+    String password = "Paramore14";
 
     public Connector() throws SQLException {
         Connection connection = DriverManager.getConnection(url, username, password);

@@ -28,6 +28,7 @@ public class AssignmentFrame extends JFrame {
     JTable usersTable;
     JTable userAddedTable;
     JTable coursesTable;
+    JTable coursesAddedTable;
 
     TableRowSorter trs;
 
@@ -69,9 +70,14 @@ public class AssignmentFrame extends JFrame {
         usersTable = new JTable();
         userAddedTable = new JTable();
         coursesTable = new JTable();
+        coursesAddedTable = new JTable();
+
 
         DefaultTableModel model = new DefaultTableModel();
         setTablesProperties(usersColumnsNames, model, usersTable);
+
+        DefaultTableModel added = new DefaultTableModel();
+        setTablesProperties(usersColumnsNames, added, coursesAddedTable);
 
         //JScrollPane scrollUserTable = new JScrollPane(usersTable);
         //scrollUserTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -109,6 +115,10 @@ public class AssignmentFrame extends JFrame {
         constraints.gridy = 3;
         add(usersTable, constraints);
 
+        constraints.gridx = 0;
+        constraints.gridy = 16 ;
+        add(coursesAddedTable, constraints);
+
         constraints.gridx = 4;
         constraints.gridy = 0;
         add(addUser, constraints);
@@ -142,6 +152,9 @@ public class AssignmentFrame extends JFrame {
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
 
         closeBtn.addActionListener(e -> {
             this.dispose();
