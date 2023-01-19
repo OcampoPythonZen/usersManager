@@ -1,7 +1,7 @@
 package edo.mex.gob.gui;
 
 
-import edo.mex.gob.gui.assignment.desing;
+import edo.mex.gob.gui.assignment.Cursos_Usuario;
 
 import java.sql.SQLException;
 
@@ -14,7 +14,7 @@ public class MainGUI {
         //HomeGUI main = new HomeGUI();
         //UserGUI menu = new UserGUI();
         //BatchSqlTables sql = new BatchSqlTables();
-        desing nf = new desing();
+        Cursos_Usuario nf = new Cursos_Usuario();
 
 
 
