@@ -180,7 +180,7 @@ public class CreateCoursePanel extends JPanel {
         });
 
         clearBtn.addActionListener(e -> {
-            List<JTextField> allJTextField = (List<JTextField>) List.of(
+            List<JTextField> allJTextField = List.of(
                     courseNameField,
                     professorCourseField,
                     coursePlaceField,

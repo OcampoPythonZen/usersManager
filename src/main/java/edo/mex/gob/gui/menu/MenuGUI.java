@@ -1,5 +1,6 @@
 package edo.mex.gob.gui.menu;
 
+
 import edo.mex.gob.gui.assignment.AssignmentFrame;
 import edo.mex.gob.gui.course.CourseGUI;
 import edo.mex.gob.gui.home.HomeGUI;
@@ -82,13 +83,11 @@ public class MenuGUI extends JFrame {
         userBtn.addActionListener(e -> {
             setVisible(false);
             new UserGUI().setVisible(true);
-
         });
 
         courseBtn.addActionListener(e -> {
             setVisible(false);
             new CourseGUI().setVisible(true);
-
         });
 
         assignBtn.addActionListener(e -> {
