@@ -12,27 +12,17 @@ import javax.swing.table.DefaultTableModel;
 
 public class AssignmentFrame extends JFrame {
 
-    String getCoursesQuery = "select course_name from course;";
-    String getFilterUsersQuery =
-            "select id_user, first_name, second_first_name, last_name, second_last_name, phone, email from public.user;";
-
-
-    String[] usersColumnsNames =
-            {"Id", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Telefono", "Correo Electronico"};
-    String[] coursesColumnsNames =
-            {"Id", "Nombre del Curso", "Fecha de Inicio", "Fecha de Termino", "Hora de Inicio", "Hora de termino", "Lugar", "Info"};
-
-
     AssignmentFrameLogic logic = new AssignmentFrameLogic();
 
-    public AssignmentFrame() {
+    public AssignmentFrame()  {
         initComponents();
         String title = "Asignación Usuarios/Cursos - Tlalnepantla Estado de Mexico";
         setTitle(title);
         setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    private void initComponents() {
+    private void initComponents()  {
 
         JLabel jLabel1 = new JLabel();
         JTextField jTextField1 = new JTextField(16);
@@ -52,65 +42,29 @@ public class AssignmentFrame extends JFrame {
         JButton sentEmailBtn = new JButton();
         JButton closeBtn = new JButton();
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 
         jLabel1.setText("Usuario:");
 
-
-        jTable1.setModel(new DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
-                },
-                new String[]{
-                        "ID", "Nombre(s)", "Apellido Paterno", "Apellido Materno", "Correo Electrónico"
-                }
-        ) {
-            final boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
+        logic.setModelOnTableUsers(jTable1);
         jScrollPane1.setViewportView(jTable1);
 
-        jTable2.setModel(new DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
-                },
-                new String[]{
-                        "ID", "Nombre(s)", "Apellido Paterno", "Apellido Materno", "Correo Electrónico"
-                }
-        ) {
-            final boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
+        jTable2.setModel(new DefaultTableModel());
 
-        logic.getCourses(getCoursesQuery, coursesBox);
+        logic.addCoursesItemToBox(coursesBox);
 
 
         jScrollPane2.setViewportView(jTable2);
 
         addUser.setText("Agregar");
         addUser.addActionListener(e -> {
-
+            logic.addUserToKeepOnNewTable(jTable1, jTable2);
         });
 
         deleteUser.setText("Eliminar");
         deleteUser.addActionListener(e -> {
-
+            logic.deleteRow(jTable2);
         });
 
         jLabel2.setText("Selecciona el Curso:");
