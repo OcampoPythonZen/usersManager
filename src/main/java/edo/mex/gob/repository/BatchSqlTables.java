@@ -58,9 +58,15 @@ public class BatchSqlTables {
             "CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES public.user(id_user)," +
             "CONSTRAINT fk_course FOREIGN KEY(course_id) REFERENCES course(id_course));";
 
+
     public BatchSqlTables() throws SQLException {
+        Connector connector = new Connector();
         List<String> sqlList = List.of(loginTableSql, userTableSql, usersLoginSql, courseTableSql, manyToManyTable);
-        new Connector(sqlList);
+        for (String query : sqlList) {
+            connector.insertIntoTable(query);
+        }
+        connector.closeConnection();
     }
+
 
 }

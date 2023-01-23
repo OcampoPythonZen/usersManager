@@ -5,10 +5,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -25,9 +27,7 @@ public class AssignmentFrameLogic {
             {"ID", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Telefono", "Correo Electronico"};
     Vector<String> usersColumnsNamesV = new Vector<>(List.of(usersColumnsNames));
 
-
     private DefaultTableModel newModel;
-
 
     public void addCoursesItemToBox(JComboBox<String> box) {
         Executor executor = Executors.newSingleThreadExecutor();
@@ -43,7 +43,6 @@ public class AssignmentFrameLogic {
             }
         });
     }
-
 
     void setModelOnTableUsers(JTable table) {
         Executor executor = Executors.newSingleThreadExecutor();
@@ -94,13 +93,14 @@ public class AssignmentFrameLogic {
     void deleteRow(JTable table) {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow != -1) {
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.removeRow(selectedRow);
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            List<Integer> selectedRows =
+                    Arrays.stream(table.getSelectedRows()).boxed().sorted(Collections.reverseOrder())
+                            .collect(Collectors.toList());
+            for (int row : selectedRows) {
+                model.removeRow(row);
             }
         });
     }
-
 
 }
