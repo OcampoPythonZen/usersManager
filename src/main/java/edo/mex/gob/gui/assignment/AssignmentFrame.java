@@ -69,35 +69,17 @@ public class AssignmentFrame extends JFrame {
 
         jLabel2.setText("Selecciona el Curso:");
 
-        jTable3.setModel(new DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
-                },
-                new String[]{
-                        "ID", "Nombre del Curso", "Horario", "Lugar", "Info"
-                }
-        ) {
-            final boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
 
         jScrollPane3.setViewportView(jTable3);
 
         addCourse.setText("Agregar");
         addCourse.addActionListener(e -> {
-
+            logic.fillJTableByComboItem(coursesBox.getSelectedItem().toString(), jTable3);
         });
 
         deleteCourse.setText("Eliminar");
         deleteCourse.addActionListener(e -> {
+            logic.deleteRow(jTable3);
         });
 
         saveBtn.setText("Guardar");

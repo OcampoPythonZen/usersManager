@@ -19,13 +19,18 @@ import javax.swing.table.TableModel;
 
 public class AssignmentFrameLogic {
 
-    String getCoursesQuery = "select course_name from course;";
+    String getCoursesQueryNames = "SELECT course_name FROM public.course;";
     String getUsersQuery =
-            "select id_user, first_name, second_first_name, last_name, second_last_name, phone, email from public.user;";
+            "SELECT id_user, first_name, second_first_name, last_name, second_last_name, phone, email FROM public.user;";
+
 
     String[] usersColumnsNames =
             {"ID", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Telefono", "Correo Electronico"};
     Vector<String> usersColumnsNamesV = new Vector<>(List.of(usersColumnsNames));
+
+    String[] coursesColumnsNames =
+            {"ID", "Nombre Curso", "Fecha de Inicio", "Fecha de Termino", "Hora de Inicio", "Hora de Termino", "Lugar", "Info"};
+    Vector<String> coursesColumnsNamesV = new Vector<>(List.of(coursesColumnsNames));
 
     private DefaultTableModel newModel;
 
@@ -33,7 +38,7 @@ public class AssignmentFrameLogic {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
-                ResultSet rs = new Connector().resultSetConn(getCoursesQuery);
+                ResultSet rs = new Connector().resultSetConn(getCoursesQueryNames);
                 while (rs.next()) {
                     String courseName = rs.getString("course_name");
                     box.addItem(courseName);
@@ -71,10 +76,7 @@ public class AssignmentFrameLogic {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             if (newModel == null) {
-                String[] columnsNames =
-                        {"ID", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Telefono", "Correo Electronico"};
-                Vector<String> columnsNamesV = new Vector<>(Arrays.asList(columnsNames));
-                newModel = new DefaultTableModel(columnsNamesV, 0);
+                newModel = new DefaultTableModel(usersColumnsNamesV, 0);
                 destination.setModel(newModel);
             }
             TableModel model = source.getModel();
@@ -101,6 +103,31 @@ public class AssignmentFrameLogic {
                 model.removeRow(row);
             }
         });
+    }
+
+    void fillJTableByComboItem(String selectedItem, JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setColumnIdentifiers(coursesColumnsNamesV);
+        try {
+            Connector connector = new Connector();
+            String query = "SELECT * FROM public.course";
+            ResultSet rs = connector.resultSetConn(query);
+            while (rs.next()) {
+                Long courseId = rs.getLong("id_course");
+                String courseName = rs.getString("course_name");
+                String initialDate = rs.getString("initial_date");
+                String finalDate = rs.getString("final_date");
+                String initialHour = rs.getString("initial_hour");
+                String finalHour = rs.getString("final_hour");
+                String coursePlace = rs.getString("course_place");
+                String courseInfo = rs.getString("course_info");
+                if (courseName.equals(selectedItem)) {
+                    model.addRow(new Object[]{courseId, courseName, initialDate, finalDate, initialHour, finalHour, coursePlace, courseInfo});
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
 }
