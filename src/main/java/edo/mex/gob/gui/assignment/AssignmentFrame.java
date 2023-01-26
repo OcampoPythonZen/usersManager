@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 public class AssignmentFrame extends JFrame {
@@ -42,9 +44,25 @@ public class AssignmentFrame extends JFrame {
         JButton sentEmailBtn = new JButton();
         JButton closeBtn = new JButton();
 
-
+        sentEmailBtn.setEnabled(false);
 
         jLabel1.setText("Usuario:");
+        jTextField1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                logic.filterData(jTable1, jTextField1);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                logic.filterData(jTable1, jTextField1);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
 
         logic.setModelOnTableUsers(jTable1);
         jScrollPane1.setViewportView(jTable1);
@@ -68,8 +86,6 @@ public class AssignmentFrame extends JFrame {
         });
 
         jLabel2.setText("Selecciona el Curso:");
-
-
         jScrollPane3.setViewportView(jTable3);
 
         addCourse.setText("Agregar");
@@ -84,6 +100,7 @@ public class AssignmentFrame extends JFrame {
 
         saveBtn.setText("Guardar");
         saveBtn.addActionListener(e -> {
+            sentEmailBtn.setEnabled(true);
         });
 
         sentEmailBtn.setText("Enviar Email");
@@ -98,7 +115,6 @@ public class AssignmentFrame extends JFrame {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()

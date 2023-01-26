@@ -1,6 +1,8 @@
 package edo.mex.gob.gui.assignment;
 
 import edo.mex.gob.repository.Connector;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -13,15 +15,19 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class AssignmentFrameLogic {
 
     String getCoursesQueryNames = "SELECT course_name FROM public.course;";
     String getUsersQuery =
             "SELECT id_user, first_name, second_first_name, last_name, second_last_name, phone, email FROM public.user;";
+    String getCourseInfo = "SELECT * FROM public.course";
 
 
     String[] usersColumnsNames =
@@ -31,6 +37,7 @@ public class AssignmentFrameLogic {
     String[] coursesColumnsNames =
             {"ID", "Nombre Curso", "Fecha de Inicio", "Fecha de Termino", "Hora de Inicio", "Hora de Termino", "Lugar", "Info"};
     Vector<String> coursesColumnsNamesV = new Vector<>(List.of(coursesColumnsNames));
+
 
     private DefaultTableModel newModel;
 
@@ -110,8 +117,7 @@ public class AssignmentFrameLogic {
         model.setColumnIdentifiers(coursesColumnsNamesV);
         try {
             Connector connector = new Connector();
-            String query = "SELECT * FROM public.course";
-            ResultSet rs = connector.resultSetConn(query);
+            ResultSet rs = connector.resultSetConn(getCourseInfo);
             while (rs.next()) {
                 Long courseId = rs.getLong("id_course");
                 String courseName = rs.getString("course_name");
@@ -129,5 +135,23 @@ public class AssignmentFrameLogic {
             throw new RuntimeException(ex);
         }
     }
+
+    public void filterData(JTable table, JTextField jTextField) {
+        String wordToFilter = jTextField.getText();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(sorter);
+        if (wordToFilter.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + wordToFilter));
+        }
+        jTextField.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                filterData(table, jTextField);
+            }
+        });
+    }
+
+
 
 }
