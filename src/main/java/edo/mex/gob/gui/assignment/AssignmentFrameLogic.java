@@ -1,5 +1,6 @@
 package edo.mex.gob.gui.assignment;
 
+import static edo.mex.gob.mail.EmailSender.sendEmail;
 import edo.mex.gob.repository.Connector;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -153,5 +154,10 @@ public class AssignmentFrameLogic {
     }
 
 
-
+    public void getAllDataToSendEmail(JTable jTable2, JTable jTable3) {
+        String subject = "Informacion de Cursos - Tlalnepantla Estado de Mexico";
+        List<String> getEmailsFromJTableUsers = List.of("", "");
+        List<String> getInfoFromJTableCourses = List.of("", "");
+        sendEmail("", subject, "");
+    }
 }

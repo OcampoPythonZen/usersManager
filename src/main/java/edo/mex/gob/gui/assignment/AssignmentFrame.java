@@ -16,7 +16,7 @@ public class AssignmentFrame extends JFrame {
 
     AssignmentFrameLogic logic = new AssignmentFrameLogic();
 
-    public AssignmentFrame()  {
+    public AssignmentFrame() {
         initComponents();
         String title = "Asignación Usuarios/Cursos - Tlalnepantla Estado de Mexico";
         setTitle(title);
@@ -24,7 +24,7 @@ public class AssignmentFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    private void initComponents()  {
+    private void initComponents() {
 
         JLabel jLabel1 = new JLabel();
         JTextField jTextField1 = new JTextField(16);
@@ -60,7 +60,7 @@ public class AssignmentFrame extends JFrame {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-
+                logic.filterData(jTable1, jTextField1);
             }
         });
 
@@ -101,10 +101,12 @@ public class AssignmentFrame extends JFrame {
         saveBtn.setText("Guardar");
         saveBtn.addActionListener(e -> {
             sentEmailBtn.setEnabled(true);
+
         });
 
-        sentEmailBtn.setText("Enviar Email");
+        sentEmailBtn.setText("Enviar Email(s)");
         sentEmailBtn.addActionListener(e -> {
+            logic.getAllDataToSendEmail(jTable2, jTable3);
         });
 
         closeBtn.setText("Salir");

@@ -16,7 +16,7 @@ public class EmailSender {
 
     static Logger logger = Logger.getLogger(Connector.class.getName());
 
-    private static void sendEmail(String recipient, String subject, String body) {
+    public static void sendEmail(String recipient, String subject, String body) {
 
         // Your email and password credentials
         final String myEmail = "depdireccionmujer@gmail.com";
