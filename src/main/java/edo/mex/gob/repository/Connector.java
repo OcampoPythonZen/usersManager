@@ -2,6 +2,7 @@ package edo.mex.gob.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,9 +27,17 @@ public class Connector {
         return stm.executeQuery(query);
     }
 
+    public void insertIntoTable(String insert, Integer userId, Integer courseId) throws SQLException {
+        PreparedStatement stm = connection.prepareStatement(insert);
+        stm.setInt(1, userId);
+        stm.setInt(2, courseId);
+        stm.executeUpdate();
+        logger.info(String.format("USER_MANAGERS --Query{'%s'} --insertIntoTable --Inserted into db", insert));
+    }
+
     public void insertIntoTable(String query) throws SQLException {
         Statement stm = connection.createStatement();
-        int rs = stm.executeUpdate(query);
+        stm.executeUpdate(query);
         logger.info(String.format("USER_MANAGERS --Query{'%s'} --insertIntoTable --Inserted into db", query));
     }
 

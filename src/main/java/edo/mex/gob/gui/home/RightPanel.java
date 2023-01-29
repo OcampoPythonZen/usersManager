@@ -1,6 +1,6 @@
 package edo.mex.gob.gui.home;
 
-import edo.mex.gob.gui.user.UserGUI;
+import edo.mex.gob.gui.menu.MenuGUI;
 import edo.mex.gob.repository.Connector;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -111,7 +111,10 @@ public class RightPanel extends JPanel {
                                 JOptionPane.INFORMATION_MESSAGE
                         );
                         this.setVisible(false);
-                        new UserGUI().setVisible(true);
+                        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                        frame.dispose();
+                        new MenuGUI().setVisible(true);
+
                     } else {
                         JOptionPane.showMessageDialog(
                                 this.getTopLevelAncestor(),

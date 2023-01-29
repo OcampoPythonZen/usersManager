@@ -44,7 +44,6 @@ public class AssignmentFrame extends JFrame {
         JButton sentEmailBtn = new JButton();
         JButton closeBtn = new JButton();
 
-        sentEmailBtn.setEnabled(false);
 
         jLabel1.setText("Usuario:");
         jTextField1.getDocument().addDocumentListener(new DocumentListener() {
@@ -99,13 +98,14 @@ public class AssignmentFrame extends JFrame {
         });
 
         saveBtn.setText("Guardar");
+        saveBtn.setEnabled(false);
         saveBtn.addActionListener(e -> {
-            sentEmailBtn.setEnabled(true);
-
+            logic.saveOnDb(jTable2, jTable3);
         });
 
         sentEmailBtn.setText("Enviar Email(s)");
         sentEmailBtn.addActionListener(e -> {
+            saveBtn.setEnabled(true);
             logic.getAllDataToSendEmail(jTable2, jTable3);
         });
 

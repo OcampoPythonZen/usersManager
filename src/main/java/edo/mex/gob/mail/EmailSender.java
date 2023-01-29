@@ -17,6 +17,12 @@ public class EmailSender {
     static Logger logger = Logger.getLogger(Connector.class.getName());
 
     public static void sendEmail(String recipient, String subject, String body) {
+        logger.info(String.format(
+                "The email data --recipient: [{}] --subject: [{}] --body: [{}]",
+                recipient,
+                subject,
+                body
+        ));
 
         // Your email and password credentials
         final String myEmail = "depdireccionmujer@gmail.com";
@@ -47,10 +53,8 @@ public class EmailSender {
             // Send email
             Transport.send(message);
             logger.info(String.format(
-                    "The email has been sent successfully --recipient: [{}] --subject: [{}] --body: [{}]",
-                    recipient,
-                    subject,
-                    body
+                    "The email has been sent successfully --message: [{}]",
+                    message
             ));
         } catch (MessagingException e) {
             logger.warning(String.format("There was an error sending the email --error[{}]", e.getMessage()));

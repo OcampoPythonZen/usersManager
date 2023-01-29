@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +31,7 @@ public class AssignmentFrameLogic {
             "SELECT id_user, first_name, second_first_name, last_name, second_last_name, phone, email FROM public.user;";
     String getCourseInfo = "SELECT * FROM public.course";
 
+    String manyToMany = "INSERT INTO public.users_courses(user_id, course_id) VALUES (?, ?)";
 
     String[] usersColumnsNames =
             {"ID", "Primer Nombre", "Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Telefono", "Correo Electronico"};
@@ -153,11 +155,61 @@ public class AssignmentFrameLogic {
         });
     }
 
-
-    public void getAllDataToSendEmail(JTable jTable2, JTable jTable3) {
+    public void getAllDataToSendEmail(JTable userTable, JTable courseTable) {
         String subject = "Informacion de Cursos - Tlalnepantla Estado de Mexico";
-        List<String> getEmailsFromJTableUsers = List.of("", "");
-        List<String> getInfoFromJTableCourses = List.of("", "");
-        sendEmail("", subject, "");
+        DefaultTableModel userModel = (DefaultTableModel) userTable.getModel();
+        DefaultTableModel courseModel = (DefaultTableModel) courseTable.getModel();
+        List<String> emails = getList(userModel, "Correo Electronico");
+        String info = getAllInfo(courseModel);
+        for (String email : emails) {
+            sendEmail(email, subject, info);
+        }
     }
+
+    private List<String> getList(DefaultTableModel model, String columnName) {
+        List<String> data = new ArrayList<String>();
+        int columnIndex = -1;
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            if (model.getColumnName(i).equals(columnName)) {
+                columnIndex = i;
+                break;
+            }
+        }
+        if (columnIndex != -1) {
+            for (int count = 0; count < model.getRowCount(); count++) {
+                data.add(model.getValueAt(count, columnIndex).toString());
+            }
+        }
+        return data;
+    }
+
+    private String getAllInfo(DefaultTableModel model) {
+        StringBuilder info = new StringBuilder();
+        for (int count = 0; count < model.getRowCount(); count++) {
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                info.append(model.getColumnName(i) + ": " + model.getValueAt(count, i) + "\n");
+            }
+            info.append("\n");
+        }
+        return info.toString();
+    }
+
+    public void saveOnDb(JTable jTableUsers, JTable jTableCourses) {
+        DefaultTableModel userModel = (DefaultTableModel) jTableUsers.getModel();
+        DefaultTableModel courseModel = (DefaultTableModel) jTableCourses.getModel();
+
+        try {
+            for (int i = 0; i < userModel.getRowCount(); i++) {
+                for (int j = 0; j < courseModel.getRowCount(); j++) {
+                    Integer userId = ((Long) userModel.getValueAt(i, 0)).intValue();
+                    Integer courseId = ((Long) courseModel.getValueAt(j, 0)).intValue();
+                    new Connector().insertIntoTable(manyToMany, userId, courseId);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
 }
