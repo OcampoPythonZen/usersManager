@@ -20,12 +20,22 @@ public class LeftPanel extends JPanel {
     JButton imageButton;
     JLabel welcomeLabel;
     JLabel welcomeLabel2;
+    JPanel color;
+
+
 
     public LeftPanel() {
 
         imageButton = new JButton();
         welcomeLabel = new JLabel();
         welcomeLabel2 = new JLabel();
+        color =new JPanel();
+
+
+
+
+
+
 
         welcomeLabel.setText("Bienvenidos al Sistema de Registros");
         welcomeLabel.setFont(new Font("Calibri", Font.BOLD, 22));
@@ -37,9 +47,11 @@ public class LeftPanel extends JPanel {
         welcomeLabel2.setForeground(Color.RED);
         welcomeLabel2.setHorizontalAlignment(JLabel.CENTER);
 
+
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(10, 10, 10, 10);
+
 
         Image img;
         try {

@@ -2,9 +2,8 @@ package edo.mex.gob.gui.home;
 
 import edo.mex.gob.gui.menu.MenuGUI;
 import edo.mex.gob.repository.Connector;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.BorderFactory;
@@ -32,7 +31,9 @@ public class RightPanel extends JPanel {
         passwordLabel = new JLabel("Password:");
         passwordTextField = new JPasswordField(8);
         access = new JButton("Accesar");
+        access.setBackground(java.awt.Color.yellow);
         cancel = new JButton("Cancelar");
+        cancel.setBackground(java.awt.Color.yellow);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.CENTER;

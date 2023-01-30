@@ -12,8 +12,8 @@ public class Connector {
 
     private static final Logger logger = Logger.getLogger(Connector.class.getName());
     private static final String url = "jdbc:postgresql://localhost:5432/users_manager_db?socketTimeout=30";
-    private static final String username = "rappipay";
-    private static final String password = "secret";
+    private static final String username = "postgres";
+    private static final String password = "Paramore14";
     private final Connection connection;
 
     public Connector() throws SQLException {

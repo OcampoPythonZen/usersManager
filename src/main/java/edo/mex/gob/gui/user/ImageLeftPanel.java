@@ -37,14 +37,17 @@ public class ImageLeftPanel extends JPanel {
         welcomeLabel2.setHorizontalAlignment(JLabel.CENTER);
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(5, 5, 5, 5);
+       constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(1, 0, 1, 0);
 
         Image img;
         try {
             img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/user_icon.png")));
+
         } catch (IOException e) {
             throw new RuntimeException(e + "We cannot access to this image!");
+
+
         }
         imageButton.setIcon(new ImageIcon(img));
         imageButton.setBackground(null);

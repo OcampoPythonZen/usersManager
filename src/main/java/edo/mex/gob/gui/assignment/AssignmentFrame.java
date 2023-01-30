@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class AssignmentFrame extends JFrame {
 
@@ -18,10 +19,13 @@ public class AssignmentFrame extends JFrame {
 
     public AssignmentFrame() {
         initComponents();
-        String title = "Asignación Usuarios/Cursos - Tlalnepantla Estado de Mexico";
+        String title = "Asignacion Usuarios/Cursos - Tlalnepantla Estado de Mexico";
         setTitle(title);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(Color.decode("#92D050"));
+
+
     }
 
     private void initComponents() {
