@@ -69,7 +69,7 @@ public class CreateCoursePanel extends JPanel {
         JDatePanelImpl datePanel1 = new JDatePanelImpl(model1, p1);
         JDatePickerImpl dateFinishedPicker = new JDatePickerImpl(datePanel1, new DateLabelFormatter());
 
-        descriptionArea = new JTextArea("Info del curso:\n", 8, 35);
+        descriptionArea = new JTextArea("\n", 8, 35);
         scroll = new JScrollPane(descriptionArea);
 
         startedHourLabel = new JLabel("Hora de inicio del curso:");
