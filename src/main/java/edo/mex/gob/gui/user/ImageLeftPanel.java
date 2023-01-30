@@ -27,14 +27,16 @@ public class ImageLeftPanel extends JPanel {
         welcomeLabel2 = new JLabel();
 
         welcomeLabel.setText("ALTA DE USUARIO AL CURSO");
-        welcomeLabel.setFont(new Font("Calibri", Font.BOLD, 22));
+        welcomeLabel.setFont(new Font("Calibri", Font.BOLD, 14));
         welcomeLabel.setForeground(Color.BLUE);
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
+        welcomeLabel.setVerticalAlignment(JLabel.CENTER);
 
         welcomeLabel2.setText("TLALNEPANTLA  -  ESTADO DE MEXICO.");
-        welcomeLabel2.setFont(new Font("Calibri", Font.BOLD, 18));
+        welcomeLabel2.setFont(new Font("Calibri", Font.BOLD, 15));
         welcomeLabel2.setForeground(Color.RED);
         welcomeLabel2.setHorizontalAlignment(JLabel.CENTER);
+        welcomeLabel2.setVerticalAlignment(JLabel.CENTER);
 
         GridBagConstraints constraints = new GridBagConstraints();
        constraints.anchor = GridBagConstraints.CENTER;
@@ -42,7 +44,7 @@ public class ImageLeftPanel extends JPanel {
 
         Image img;
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/user_icon.png")));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/assignment.png")));
 
         } catch (IOException e) {
             throw new RuntimeException(e + "We cannot access to this image!");
@@ -53,6 +55,7 @@ public class ImageLeftPanel extends JPanel {
         imageButton.setBackground(null);
         imageButton.setBorder(null);
         imageButton.setContentAreaFilled(false);
+        imageButton.setVerticalAlignment(JButton.CENTER);
 
         setLayout(new GridBagLayout());
 
