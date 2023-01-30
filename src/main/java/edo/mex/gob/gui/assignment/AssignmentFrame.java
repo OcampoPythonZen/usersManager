@@ -1,13 +1,8 @@
 package edo.mex.gob.gui.assignment;
 
 import edo.mex.gob.gui.menu.MenuGUI;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +16,11 @@ public class AssignmentFrame extends JFrame {
         initComponents();
         String title = "Asignacion Usuarios/Cursos - Tlalnepantla Estado de Mexico";
         setTitle(title);
+
         setVisible(true);
+        setResizable(false);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.getContentPane().setBackground(Color.decode("#92D050"));
 
@@ -271,6 +270,8 @@ public class AssignmentFrame extends JFrame {
                                         .addComponent(closeBtn))
                                 .addGap(35, 35, 35))
         );
+
+
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
