@@ -25,8 +25,8 @@ public class EmailSender {
         ));
 
         // Your email and password credentials
-        final String myEmail = "depdireccionmujer@gmail.com";
-        final String myPassword = "vxwdpcvhkzdfavxv";
+        final String myEmail = "mujercapacitacion@gmail.com";
+        final String myPassword = "kqnnplqruvfdzhul";
 
         // Email account properties configuration
         Properties props = new Properties();
